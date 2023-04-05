@@ -13,8 +13,8 @@ namespace TrackerLibrary
     {
         public static void TestEmail()
         {
-            var fromAddress = new MailAddress("sender@bruh.online", "bruh");
-            var toAddress = new MailAddress("bruhhh@bruh.online", "Recipient bruh");
+            var fromAddress = new MailAddress("sender email", "bruh");
+            var toAddress = new MailAddress("recipient email", "Recipient bruh");
             const string fromPassword = "password";
             const string subject = "Test email";
             const string body = "This is a test email.";
@@ -37,19 +37,16 @@ namespace TrackerLibrary
                 smtp.Send(message);
             }
         }
-        /// <summary>
-        /// Primary Send Email method, used to send e-mails to single individuals.
-        /// </summary>
+        
         public static void SendEmail(string to, string subject, string body)
         {
             SendEmail(new List<string> { to }, new List<string> { }, subject, body);
         }
 
-        /// <summary>
-        /// Secondary Send Email method, used to send the final e-mail at tournament's conclusion (includes BCC list).
-        /// </summary>
+        
         public static void SendEmail(List<string> to, List<string> bcc, string subject, string body)
         {
+            // use TestEmail() Method to check your SMTP server
             //TestEmail();
             MailAddress fromMailAddress = new(GlobalConfig.AppKeyLookup("senderEmail"), GlobalConfig.AppKeyLookup("displayName"));
 
@@ -68,7 +65,7 @@ namespace TrackerLibrary
             mail.IsBodyHtml = true;
 
             SmtpClient client = new();
-
+            // uncoment to use ability to send emails to your members in Tournament
             //client.Send(mail);
         }
     }
