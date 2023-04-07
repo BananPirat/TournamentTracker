@@ -9,7 +9,7 @@ namespace TournamentTracker
     public class SqlConnector : IDataConnection
     {
         private const string db = "Tournaments";
-
+        
         public void CreatePerson(PersonModel model)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(db)))
@@ -25,6 +25,10 @@ namespace TournamentTracker
                 connection.Execute("dbo.spPeople_Insert", person, commandType: CommandType.StoredProcedure);
 
                 model.Id = person.Get<int>("@id");
+                //insert into dbo.People (FirstName,LastName,EmailAddress,CellphoneNumber)
+	            //values (@FirstName,@LastName,@EmailAddress,@CellphoneNumber);
+
+	            //select @id=SCOPE_IDENTITY();
             }
         }
 
@@ -43,6 +47,10 @@ namespace TournamentTracker
                 connection.Execute("dbo.spPrizes_Insert", prize, commandType: CommandType.StoredProcedure);
 
                 model.Id = prize.Get<int>("@id");
+                //insert into dbo.Prizes (PlaceNumber,PlaceName,PrizeAmount,PrizePercentage)
+	            //values (@PlaceNumber, @PlaceName, @PrizeAmount, @PrizePercentage); 
+
+	            //select @id = SCOPE_IDENTITY();
             }
         }
 
@@ -67,6 +75,10 @@ namespace TournamentTracker
                     team.Add("@PersonId", teamMember.Id);
 
                     connection.Execute("dbo.spTeamMembers_Insert", team, commandType: CommandType.StoredProcedure);
+                    //insert into dbo.TeamMembers(TeamId,PersonId)
+	                //values (@TeamId,@PersonId);
+
+	                //select @id = SCOPE_IDENTITY();
                 }
             }
         }
@@ -76,9 +88,13 @@ namespace TournamentTracker
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(db)))
             {
                 SaveTournament(connection, model);
+                
                 SaveTournamentPrizes(connection, model);
+                
                 SaveTournamentEntries(connection, model);
+                
                 SaveTournamentRounds(connection, model);
+                
                 TournamentLogic.UpdateTournamentResults(model);
             }
         }
@@ -266,7 +282,7 @@ namespace TournamentTracker
                             }
                         }
                     }
-                    //list<list<matchupmodle>>
+                    //List<List<MatchupModle>>
                     List<MatchupModel> currentRow = new List<MatchupModel>();
                     int currentRound = 1;
 
@@ -303,8 +319,8 @@ namespace TournamentTracker
                 }
 
 
-                // spMatchupsEntries_Update
-
+                // spMatchupsEntries_Update 
+                
                 foreach (MatchupEntryModel me in model.Entries)
                 {
                     if (me.TeamCompeting != null)
