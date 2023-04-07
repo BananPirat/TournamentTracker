@@ -12,4 +12,4 @@ After you created tournament you will thrown to the Tournament Viever where you 
 ### And thats it, now you can easily make your own tournies!
 
 
-For those who want to send emails to team members created before you need to make your own SMTP server and user who will send emails automatically to them(better instruction writed in EmailLogic.cs)
+For those who want to send emails to team members created before you need to make your own SMTP server and user who will send emails automatically to them(better instruction written in EmailLogic.cs)
