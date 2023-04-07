@@ -1,4 +1,4 @@
-# This application used to make your own tournaments
+ This application used to make your own tournaments
 <h2>**To create your personal tourney you need:**</h2>
 - Create your Teams(minimum 2 teams required)
   - To create your team you need to create members(Name, SecondName, Email, PhoneNumber)
